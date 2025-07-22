@@ -1,10 +1,14 @@
 import { Button } from "../ui/button"
-import { Menu, X, Sun, Moon } from "lucide-react"
+import { Menu, X, Sun, Moon, User } from "lucide-react"
 import { useState, useEffect } from "react"
+
+import { Link, useLocation, useNavigate } from "react-router-dom" // Add these imports
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Check for saved dark mode preference or system preference
   useEffect(() => {
@@ -31,6 +35,10 @@ export function Header() {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
   }
+    // Helper function to check if link is active
+  const isActiveLink = (path) => {
+    return location.pathname === path
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md border-b border-border z-50 transition-all duration-300">
@@ -44,20 +52,58 @@ export function Header() {
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+         {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center ml-32 space-x-8">
+            <Link 
+              to="/" 
+              className={`text-sm font-medium transition-colors ${
+                isActiveLink('/') 
+                  ? 'text-primary font-semibold' 
+                  : 'text-muted-foreground hover:text-primary'
+              }`}
+            >
               Browse
-            </a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link 
+              to="/sell" 
+              className={`text-sm font-medium transition-colors ${
+                isActiveLink('/sell') 
+                  ? 'text-primary font-semibold' 
+                  : 'text-muted-foreground hover:text-primary'
+              }`}
+            >
               Sell
-            </a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link 
+              to="/about" 
+              className={`text-sm font-medium transition-colors ${
+                isActiveLink('/about') 
+                  ? 'text-primary font-semibold' 
+                  : 'text-muted-foreground hover:text-primary'
+              }`}
+            >
+              Rent
+            </Link>
+            <Link 
+              to="/how-it-works" 
+              className={`text-sm font-medium transition-colors ${
+                isActiveLink('/how-it-works') 
+                  ? 'text-primary font-semibold' 
+                  : 'text-muted-foreground hover:text-primary'
+              }`}
+            >
               How it Works
-            </a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link 
+              to="/about" 
+              className={`text-sm font-medium transition-colors ${
+                isActiveLink('/about') 
+                  ? 'text-primary font-semibold' 
+                  : 'text-muted-foreground hover:text-primary'
+              }`}
+            >
               About
-            </a>
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
@@ -81,6 +127,17 @@ export function Header() {
             >
               Login
             </Button>
+               <Button 
+               onClick={()=>navigate('/profile')}
+              variant="default"
+              size="sm"
+              className="bg-secondary text-secondary-foreground hover:bg-gray-200 hover:text-foreground"
+          
+            >
+              My Profile
+              <User size= {20}/>
+            </Button>
+
           </div>
 
           {/* Mobile Menu Button */}

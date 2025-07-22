@@ -60,55 +60,50 @@ function Home() {
   }
 
   return (
-    <div className="space-y-6 py-4">
-      <FiltersBar 
-        selectedCollege={selectedCollege}
-        selectedCity={selectedCity}
-        onCollegeChange={handleCollegeChange}
-        onCityChange={handleCityChange}
-        onFilterClick={handleFilterClick}
-      />
-      
-      {/* Show active category filters */}
-      {selectedCategories.length > 0 && (
-        <div className="flex gap-2 flex-wrap">
-          <span className="text-sm text-muted-foreground">Filtering by:</span>
-          {selectedCategories.map((category) => (
-            <Badge key={category} variant="secondary" className="text-xs">
-              {category}
-              <button 
-                onClick={() => handleCategoryToggle(category)}
-                className="ml-1 hover:bg-destructive hover:text-destructive-foreground rounded-full p-0.5"
-              >
-                ×
-              </button>
-            </Badge>
-          ))}
-        </div>
-      )}
-      
-      {products.length === 0 && !loading ? (
-        <EmptyState 
-          type="products"
-          onAction={handlePostItem}
-        />
-      ) : (
-        <ProductGrid 
-          products={products}
-          onProductClick={handleProductClick}
-        />
-      )}
+  <div className="space-y-6 py-4">
+    <FiltersBar 
+      selectedCollege={selectedCollege}
+      selectedCity={selectedCity}
+      onCollegeChange={handleCollegeChange}
+      onCityChange={handleCityChange}
+      onFilterClick={handleFilterClick}
+    />
+    
+    {/* Show active category filters */}
+    {selectedCategories.length > 0 && (
+      <div className="flex gap-2 flex-wrap">
+        <span className="text-sm text-muted-foreground">Filtering by:</span>
+        {selectedCategories.map((category) => (
+          <Badge key={category} variant="secondary" className="text-xs">
+            {category}
+            <button 
+              onClick={() => handleCategoryToggle(category)}
+              className="ml-1 hover:bg-destructive hover:text-destructive-foreground rounded-full p-0.5"
+            >
+              ×
+            </button>
+          </Badge>
+        ))}
+      </div>
+    )}
+    
+    {/* Always show ProductGrid - it will use mock data when products is empty */}
+    <ProductGrid 
+      products={products}
+      onProductClick={handleProductClick}
+    />
 
-      <FilterModal
-        isOpen={isFilterModalOpen}
-        onClose={() => setIsFilterModalOpen(false)}
-        selectedCategories={selectedCategories}
-        onCategoryToggle={handleCategoryToggle}
-        onApplyFilters={handleApplyFilters}
-        onClearFilters={handleClearFilters}
-      />
-    </div>
-  )
+    <FilterModal
+      isOpen={isFilterModalOpen}
+      onClose={() => setIsFilterModalOpen(false)}
+      selectedCategories={selectedCategories}
+      onCategoryToggle={handleCategoryToggle}
+      onApplyFilters={handleApplyFilters}
+      onClearFilters={handleClearFilters}
+    />
+  </div>
+)
+
 }
 
 export default Home

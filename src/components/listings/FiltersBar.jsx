@@ -28,19 +28,29 @@ export function FiltersBar({
       {/* Location Filter Chips - Only College and City */}
       <div className="flex gap-2 overflow-x-auto pb-2">
         <Badge 
-          variant="default"
-          className="px-3 py-1 rounded-full whitespace-nowrap cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
-          onClick={onCollegeChange}
-        >
-          {selectedCollege}
-        </Badge>
-        <Badge 
           variant="outline"
           className="px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
           onClick={onCityChange}
         >
           {selectedCity}
         </Badge>
+        <Badge 
+          variant="default"
+          className="px-3 py-1 rounded-full whitespace-nowrap cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
+          onClick={onCollegeChange}
+        >
+          {selectedCollege}
+        </Badge>
+        
+         <Badge 
+          variant="outline"
+          className="px-3 py-1 rounded-full whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
+          onClick={onCityChange}
+        >
+            All
+        </Badge>
+
+
       </div>
     </div>
   )
